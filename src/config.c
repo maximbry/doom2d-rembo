@@ -164,7 +164,7 @@ next:
 int get_key(char *name)
 {
     int i;
-    for(i=1; i<SDLK_LAST; i++) {
+    for(i=1; i<SDL_NUM_SCANCODES; i++) {
         char* s = SDL_GetKeyName(i);
         if (s && strcasecmp(name,s) == 0) {
 
@@ -242,7 +242,7 @@ void CFG_load(void) {
                 logo("Unknown key in cfg: %s=%s\n",p1,p2);
                 logo("List available key names:\n");
                 int i;
-                for(i=1; i<SDLK_LAST; i++) {
+                for(i=1; i<SDL_NUM_SCANCODES; i++) {
                     char* s = SDL_GetKeyName(i);
 
                     if (!strcasecmp(s,"unknown key") == 0) {

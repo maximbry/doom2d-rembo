@@ -62,7 +62,6 @@ short V_init(void)
                                         0,
                                         0);
     SDL_SetSurfaceBlendMode(screen, SDL_BLENDMODE_NONE);                                    
-    // screen = SDL_GetWindowSurface(window);  
     texture = SDL_CreateTexture( renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCRW, SCRH );                                  
     SCRW /= HQ;
     SCRH /= HQ;
@@ -287,9 +286,6 @@ void VP_set(void *p,short f,short n)
 // NULL - реальный экран
 void V_setscr(void *p)
 {
-    // if (screen) SDL_Flip(screen);
-    //SDL_RenderClear(renderer);
-    //SDL_RenderClear(renderer);
     SDL_RenderClear(renderer);
 }
 
@@ -297,17 +293,6 @@ void V_setscr(void *p)
 void V_copytoscr(short x,short w,short y,short h)
 {
     x*=HQ; y*=HQ; w*=HQ; h*=HQ;
-    // SDL_UpdateRect(screen, x, y, w, h);
-    /*SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-    SDL_RenderClear(renderer);
-    SDL_Rect texture_rect;
-    texture_rect.x = 0;
-    texture_rect.y = 0;
-    texture_rect.w = 640;
-    texture_rect.w = 480;
-    Uint32 *pixels = screen->pixels;
-    SDL_UpdateTexture(texture, NULL, pixels, 640 * sizeof (Uint32));*/
-    // SDL_RenderCopy(renderer, texture, NULL, &texture_rect);
     SDL_Texture* tex = SDL_CreateTextureFromSurface(renderer, screen);
     SDL_Rect texture_rect;
     texture_rect.x = 0;
@@ -316,7 +301,6 @@ void V_copytoscr(short x,short w,short y,short h)
     texture_rect.h = SCRH;
     SDL_RenderCopy(renderer, tex, NULL, &texture_rect);
     SDL_RenderPresent(renderer);
-    // SDL_DestroyTexture(texture);
 }
 
 void V_maptoscr(int x,int w,int y,int h,void *cmap)

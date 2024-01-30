@@ -37,7 +37,9 @@ unsigned char scrbuf[64000];
 int SCRW = 800;
 int SCRH = 600;
 
-SDL_Surface* screen = NULL;
+SDL_Window *window;
+SDL_Renderer *renderer;
+SDL_Surface *screen;
 
 int cx1,cx2,cy1,cy2;
 
@@ -47,10 +49,16 @@ char fullscreen = OFF;
 
 short V_init(void)
 {
-    Uint32 flags = SDL_SWSURFACE|SDL_DOUBLEBUF|SDL_HWPALETTE;
-    if (fullscreen) flags = flags | SDL_FULLSCREEN;
-    screen = SDL_SetVideoMode(SCRW, SCRH, 8, flags);
-    if (!screen) ERR_failinit("Unable to set video mode: %s\n", SDL_GetError());
+    Uint32 flags = 0;
+    if (fullscreen) flags = flags | SDL_WINDOW_FULLSCREEN;
+    window = SDL_CreateWindow("Doom 2D v1.351", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCRW, SCRH, flags );
+    if (!window) ERR_failinit("Unable to set video mode: %s\n", SDL_GetError());
+    renderer = SDL_CreateRenderer(window, -1, 0);
+    SDL_Surface *screen = SDL_CreateRGBSurface(0, SCRW, SCRH, 32,
+                                        0x00FF0000,
+                                        0x0000FF00,
+                                        0x000000FF,
+                                        0xFF000000);
     SCRW /= HQ;
     SCRH /= HQ;
     return 0;
@@ -264,7 +272,7 @@ void VP_set(void *p,short f,short n)
       colors[i].b=ptr[2]*4;
       ptr+=3;
     }
-    SDL_SetPalette(screen, SDL_LOGPAL|SDL_PHYSPAL, colors, f, n);
+    SDL_SetPalette(screen, 0, colors, f, n);
 }
 
 // установить адрес экранного буфера
@@ -333,6 +341,7 @@ void Z_drawfld(byte *fld, int bg)
 
 void V_toggle()
 {
+    /*
     if (!SDL_WM_ToggleFullScreen(screen)) {
         int ncolors = screen->format->palette->ncolors;
         SDL_Color colors[256];
@@ -355,4 +364,5 @@ void V_toggle()
 
         SDL_SetPalette(screen, SDL_LOGPAL|SDL_PHYSPAL, colors, 0, ncolors);
     }
+    */
 }

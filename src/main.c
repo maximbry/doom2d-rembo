@@ -82,7 +82,7 @@ byte bright[256];
 
 int main(int argc, char *argv[]) {
   if (SDL_Init(SDL_INIT_VIDEO)<0) ERR_failinit("Unable to init SDL: %s\n", SDL_GetError());
-  SDL_WM_SetCaption("Doom 2D v1.351", "Doom 2D");
+  // SDL_WM_SetCaption("Doom 2D v1.351", "Doom 2D");
   int i;
   
   pl1.ku=SDLK_s;

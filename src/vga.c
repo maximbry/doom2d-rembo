@@ -301,6 +301,7 @@ void V_copytoscr(short x,short w,short y,short h)
     texture_rect.h = SCRH;
     SDL_RenderCopy(renderer, tex, NULL, &texture_rect);
     SDL_RenderPresent(renderer);
+    SDL_DestroyTexture(tex);
 }
 
 void V_maptoscr(int x,int w,int y,int h,void *cmap)

@@ -487,25 +487,25 @@ int GM_act(void) {
       if(mnu) break;
       Z_sound(msnd3,128);
       GM_command(QUITGAME);break;
-    case SDLK_UP: case SDLK_KP8://case 0x48: case 0xC8:
+    case SDLK_UP: case SDLK_KP_8://case 0x48: case 0xC8:
       if(!mnu) break;
       if(mnu->type!=MENU) break;
       if(--mnu->cur<0) mnu->cur=mnu->n-1;
       GM_set(mnu);
       Z_sound(msnd1,128);break;
-    case SDLK_DOWN: case SDLK_KP5: case SDLK_KP2://case 0x50: case 0xD0: case 0x4C:
+    case SDLK_DOWN: case SDLK_KP_5: case SDLK_KP_2://case 0x50: case 0xD0: case 0x4C:
       if(!mnu) break;
       if(mnu->type!=MENU) break;
       if(++mnu->cur>=mnu->n) mnu->cur=0;
       GM_set(mnu);
       Z_sound(msnd1,128);break;
-    case SDLK_LEFT: case SDLK_RIGHT: case SDLK_KP4: case SDLK_KP6://case 0x4B: case 0x4D: case 0xCB: case 0xCD:
+    case SDLK_LEFT: case SDLK_RIGHT: case SDLK_KP_4: case SDLK_KP_6://case 0x4B: case 0x4D: case 0xCB: case 0xCD:
 	  if(!mnu) break;
 	  if(mnu->type!=MENU) break;
 	  if(mnu->t[mnu->cur]<SVOLM) break;
-	  GM_command(mnu->t[mnu->cur]+((lastkey==SDLK_LEFT || lastkey==SDLK_KP4)?0:1));//GM_command(mnu->t[mnu->cur]+((lastkey==0x4B || lastkey==0xCB)?0:1));
+	  GM_command(mnu->t[mnu->cur]+((lastkey==SDLK_LEFT || lastkey==SDLK_KP_4)?0:1));//GM_command(mnu->t[mnu->cur]+((lastkey==0x4B || lastkey==0xCB)?0:1));
 	  GM_set(mnu);
-	  if(!movsndt) movsndt=Z_sound((lastkey==SDLK_LEFT || lastkey==SDLK_KP4)?msnd5:msnd6,255);//if(!movsndt) movsndt=Z_sound((lastkey==0x4B || lastkey==0xCB)?msnd5:msnd6,255);
+	  if(!movsndt) movsndt=Z_sound((lastkey==SDLK_LEFT || lastkey==SDLK_KP_4)?msnd5:msnd6,255);//if(!movsndt) movsndt=Z_sound((lastkey==0x4B || lastkey==0xCB)?msnd5:msnd6,255);
 	  break;
     case SDLK_RETURN: case SDLK_SPACE: case SDLK_KP_ENTER://case 0x1C: case 0x39: case 0x9C:
 	  if(!mnu) break;

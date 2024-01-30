@@ -43,7 +43,8 @@
 #include "misc.h"
 #include "map.h"
 
-#include <SDL2/SDL_keysym.h>
+#include <SDL2/SDL_keyboard.h>
+#include <SDL2/SDL_scancode.h>
 
 #define LT_DELAY 8
 #define LT_HITTIME 6

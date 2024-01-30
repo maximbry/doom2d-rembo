@@ -148,7 +148,7 @@ static menu_t *mnu=NULL;
 
 static byte gm_redraw=0;
 static int gm_tm=0;
-short lastkey=0;
+int lastkey=0;
 static void *csnd1,*csnd2,*msnd1,*msnd2,*msnd3,*msnd4,*msnd5,*msnd6;
 static int movsndt=0;
 static vgaimg *msklh[2],*mbarl,*mbarm,*mbarr,*mbaro,*mslotl,*mslotm,*mslotr;
@@ -404,7 +404,7 @@ struct {
     {0}
 };
 
-byte get_keychar(int keysym)
+int get_keychar(int keysym)
 {
     int i = 0;
     while (keychar[i].keysym) {

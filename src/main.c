@@ -85,15 +85,15 @@ int main(int argc, char *argv[]) {
   // SDL_WM_SetCaption("Doom 2D v1.351", "Doom 2D");
   int i;
   
-  pl1.ku=SDLK_s;
-  pl1.kd=SDLK_s;
-  pl1.kl=SDLK_a;
-  pl1.kr=SDLK_d;
-  pl1.kf=SDLK_h;
-  pl1.kj=SDLK_SPACE;
-  pl1.kwl=SDLK_q;
-  pl1.kwr=SDLK_e;
-  pl1.kp=SDLK_j;
+  pl1.ku=SDL_SCANCODE_W;
+  pl1.kd=SDL_SCANCODE_S;
+  pl1.kl=SDL_SCANCODE_A;
+  pl1.kr=SDL_SCANCODE_D;
+  pl1.kf=SDL_SCANCODE_H;
+  pl1.kj=SDL_SCANCODE_SPACE;
+  pl1.kwl=SDL_SCANCODE_Q;
+  pl1.kwr=SDL_SCANCODE_E;
+  pl1.kp=SDL_SCANCODE_J;
   pl1.id=-1;
   pl2.ku=SDLK_e;
   pl2.kd=SDLK_d;

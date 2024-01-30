@@ -60,7 +60,7 @@ void A8_close(void);
 void FX_trans1(int t);
 extern unsigned char fx_scr1[64000],fx_scr2[64000];
 
-extern short lastkey;
+extern int lastkey;
 
 
 extern int hit_xv,hit_yv;

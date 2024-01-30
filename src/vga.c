@@ -279,14 +279,15 @@ void VP_set(void *p,short f,short n)
 // NULL - реальный экран
 void V_setscr(void *p)
 {
-    if (screen) SDL_Flip(screen);
+    // if (screen) SDL_Flip(screen);
 }
 
 // скопировать прямоугольник на экран
 void V_copytoscr(short x,short w,short y,short h)
 {
     x*=HQ; y*=HQ; w*=HQ; h*=HQ;
-    SDL_UpdateRect(screen, x, y, w, h);
+    // SDL_UpdateRect(screen, x, y, w, h);
+    SDL_RenderPresent(renderer);
 }
 
 void V_maptoscr(int x,int w,int y,int h,void *cmap)

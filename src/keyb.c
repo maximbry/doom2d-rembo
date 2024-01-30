@@ -36,7 +36,7 @@ static key_f *key_proc = NULL;
 
 void K_init()
 {
-    keys = SDL_GetKeyState(NULL);
+    keys = SDL_GetKeyboardState(NULL);
 }
 
 void K_done()

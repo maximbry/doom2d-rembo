@@ -40,6 +40,8 @@ int SCRH = 600;
 SDL_Window *window;
 SDL_Renderer *renderer;
 SDL_Surface *screen;
+SDL_Surface *window_surface;
+SDL_Texture *texture;
 
 int cx1,cx2,cy1,cy2;
 
@@ -51,16 +53,20 @@ short V_init(void)
 {
     Uint32 flags = 0;
     if (fullscreen) flags = flags | SDL_WINDOW_FULLSCREEN;
-    window = SDL_CreateWindow("Doom 2D v1.351", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCRW, SCRH, flags );
+    window = SDL_CreateWindow("Doom 2D v1.351", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCRW, SCRH, SDL_WINDOW_OPENGL );
     if (!window) ERR_failinit("Unable to set video mode: %s\n", SDL_GetError());
     renderer = SDL_CreateRenderer(window, -1, 0);
-    SDL_Surface *screen = SDL_CreateRGBSurface(0, SCRW, SCRH, 32,
-                                        0x00FF0000,
-                                        0x0000FF00,
-                                        0x000000FF,
-                                        0xFF000000);
+    screen = SDL_CreateRGBSurface(0, SCRW, SCRH, 8,
+                                        0,
+                                        0,
+                                        0,
+                                        0);
+    SDL_SetSurfaceBlendMode(screen, SDL_BLENDMODE_NONE);                                    
+    // screen = SDL_GetWindowSurface(window);  
+    texture = SDL_CreateTexture( renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCRW, SCRH );                                  
     SCRW /= HQ;
     SCRH /= HQ;
+    SDL_RenderSetLogicalSize(renderer, SCRW, SCRH);
     return 0;
 }
 
@@ -116,11 +122,13 @@ void putpixel(int x, int y, Uint8 color)
 
 byte getpixel(int x, int y)
 {
+    
     if(x>=cx1 && x<=cx2 && y>=cy1 && y<=cy2) {
         x*=HQ;
         y*=HQ;
         return *((Uint8 *)screen->pixels + y*screen->pitch + x);
     }
+    
     return 0;
 }
 
@@ -272,7 +280,7 @@ void VP_set(void *p,short f,short n)
       colors[i].b=ptr[2]*4;
       ptr+=3;
     }
-    SDL_SetPalette(screen, 0, colors, f, n);
+    SDL_SetPaletteColors(screen->format->palette, colors, 0, 256);
 }
 
 // установить адрес экранного буфера
@@ -280,6 +288,9 @@ void VP_set(void *p,short f,short n)
 void V_setscr(void *p)
 {
     // if (screen) SDL_Flip(screen);
+    //SDL_RenderClear(renderer);
+    //SDL_RenderClear(renderer);
+    SDL_RenderClear(renderer);
 }
 
 // скопировать прямоугольник на экран
@@ -287,7 +298,25 @@ void V_copytoscr(short x,short w,short y,short h)
 {
     x*=HQ; y*=HQ; w*=HQ; h*=HQ;
     // SDL_UpdateRect(screen, x, y, w, h);
+    /*SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+    SDL_Rect texture_rect;
+    texture_rect.x = 0;
+    texture_rect.y = 0;
+    texture_rect.w = 640;
+    texture_rect.w = 480;
+    Uint32 *pixels = screen->pixels;
+    SDL_UpdateTexture(texture, NULL, pixels, 640 * sizeof (Uint32));*/
+    // SDL_RenderCopy(renderer, texture, NULL, &texture_rect);
+    SDL_Texture* tex = SDL_CreateTextureFromSurface(renderer, screen);
+    SDL_Rect texture_rect;
+    texture_rect.x = 0;
+    texture_rect.y = 0;
+    texture_rect.w = SCRW;
+    texture_rect.h = SCRH;
+    SDL_RenderCopy(renderer, tex, NULL, &texture_rect);
     SDL_RenderPresent(renderer);
+    // SDL_DestroyTexture(texture);
 }
 
 void V_maptoscr(int x,int w,int y,int h,void *cmap)
@@ -343,27 +372,28 @@ void Z_drawfld(byte *fld, int bg)
 void V_toggle()
 {
     /*
-    if (!SDL_WM_ToggleFullScreen(screen)) {
-        int ncolors = screen->format->palette->ncolors;
-        SDL_Color colors[256];
-        int i;
-        for (i=0; i<ncolors; i++) {
-            colors[i].r = screen->format->palette->colors[i].r;
-            colors[i].g = screen->format->palette->colors[i].g;
-            colors[i].b = screen->format->palette->colors[i].b;
-        }
-
-        Uint32 flags = screen->flags;
-
-        SDL_FreeSurface(screen);
-
-        screen = SDL_SetVideoMode(0, 0, 0, flags ^ SDL_FULLSCREEN);
-        if(screen == NULL) {
-            ERR_fatal("Unable to set video mode\n");
-            exit(1);
-        }
-
-        SDL_SetPalette(screen, SDL_LOGPAL|SDL_PHYSPAL, colors, 0, ncolors);
+if (!SDL_SetWindowFullscreen(window, 0)) {
+    int ncolors = screen->format->palette->ncolors;
+    SDL_Color colors[256];
+    int i;
+    for (i=0; i<ncolors; i++) {
+        colors[i].r = screen->format->palette->colors[i].r;
+        colors[i].g = screen->format->palette->colors[i].g;
+        colors[i].b = screen->format->palette->colors[i].b;
     }
+
+    Uint32 flags = screen->flags;
+
+    SDL_FreeSurface(screen);
+
+    screen = SDL_CreateWindowAndRenderer(0, 0, flags, &window, &renderer);
+    if(screen == NULL) {
+        ERR_fatal("Unable to set video mode\n");
+        exit(1);
+    }
+
+    // SDL_SetPaletteColors(screen->format->palette, colors, 0, ncolors);
+}
+    
     */
 }

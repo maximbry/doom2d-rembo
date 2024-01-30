@@ -23,7 +23,7 @@
 #include "keyb.h"
 #include "vga.h"
 #include "error.h"
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 // стандартная функция обработки клавиш
 key_f def_key_proc;

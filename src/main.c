@@ -37,7 +37,7 @@
 #include "player.h"
 #include "my.h"
 
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 int gammaa=0;
 
@@ -85,15 +85,15 @@ int main(int argc, char *argv[]) {
   SDL_WM_SetCaption("Doom 2D v1.351", "Doom 2D");
   int i;
   
-  pl1.ku=SDLK_KP8;
-  pl1.kd=SDLK_KP5;
-  pl1.kl=SDLK_KP4;
-  pl1.kr=SDLK_KP6;
-  pl1.kf=SDLK_PAGEDOWN;
-  pl1.kj=SDLK_DELETE;
-  pl1.kwl=SDLK_HOME;
-  pl1.kwr=SDLK_END;
-  pl1.kp=SDLK_KP8;
+  pl1.ku=SDLK_s;
+  pl1.kd=SDLK_s;
+  pl1.kl=SDLK_a;
+  pl1.kr=SDLK_d;
+  pl1.kf=SDLK_h;
+  pl1.kj=SDLK_SPACE;
+  pl1.kwl=SDLK_q;
+  pl1.kwr=SDLK_e;
+  pl1.kp=SDLK_j;
   pl1.id=-1;
   pl2.ku=SDLK_e;
   pl2.kd=SDLK_d;

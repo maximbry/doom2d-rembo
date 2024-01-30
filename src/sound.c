@@ -23,8 +23,8 @@
 #include "glob.h"
 #include "sound.h"
 #include "error.h"
-#include <SDL.h>
-#include <SDL_mixer.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 
 #define NUM_CHANNELS 16
 #define NUM_CHUNKS 300

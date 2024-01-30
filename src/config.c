@@ -33,7 +33,7 @@
 #include "player.h"
 #include "my.h"
 
-#include <SDL_keyboard.h>
+#include <SDL2/SDL_keyboard.h>
 
 extern byte _warp,fastdraw,nomon;
 extern int mem_chk_sz;

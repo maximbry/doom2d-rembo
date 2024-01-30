@@ -43,7 +43,7 @@
 #include "misc.h"
 #include "map.h"
 
-#include <SDL_keysym.h>
+#include <SDL2/SDL_keysym.h>
 
 #define LT_DELAY 8
 #define LT_HITTIME 6

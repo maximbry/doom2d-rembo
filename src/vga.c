@@ -22,7 +22,7 @@
 
 #include "glob.h"
 #include "vga.h"
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include "error.h"
 #include "view.h"
 

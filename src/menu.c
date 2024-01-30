@@ -36,7 +36,7 @@
 #include "menu.h"
 #include "misc.h"
 
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <sys/stat.h>
 extern SDL_Surface *screen;
 

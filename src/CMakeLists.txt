@@ -5,21 +5,26 @@ project( ${BIN} )
 
 set( SOURCE_ROOT ../src )
 
-find_package(SDL REQUIRED)
-find_package(SDL_mixer REQUIRED)
+find_package(SDL2 REQUIRED)
+find_package(SDL2_mixer REQUIRED)
 
 aux_source_directory( ${SOURCE_ROOT} SOURCES )
 
 include_directories( "${SOURCE_ROOT}"
-        "${SDL_INCLUDE_DIR}"
-        "${SDLMIXER_INCLUDE_DIR}" )
+         "${SDL2_INCLUDE_DIR}" )
+         #"${SDL2_MIXER_INCLUDE_DIRS}")
+#        "${SDL2_INCLUDE_DIR}"
+#        "${SDL2_MIXER_INCLUDE_DIR}" )
 
 set( INSTALL_PATH /usr/local/bin/ )
 
-set( CMAKE_CXX_FLAGS "-O2 -Wall -MMD -MP -MF" ) 
+set( CMAKE_CXX_FLAGS "-O1 -Wall" ) 
 
 add_executable( ${BIN} ${SOURCES} )
 
-target_link_libraries( ${BIN} "${SDL_LIBRARY}" "${SDLMIXER_LIBRARY}" )
+set(CMAKE_BUILD_TYPE Debug)
+
+
+target_link_libraries( ${BIN} "-lSDL2" "-lSDL2_mixer" )
 
 install( TARGETS ${BIN} DESTINATION ${INSTALL_PATH} )

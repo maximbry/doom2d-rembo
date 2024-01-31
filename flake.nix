@@ -41,8 +41,8 @@
         clang
         cmake
         cmakeCurses
-        SDL
-        SDL_mixer
+        SDL2
+        SDL2_mixer
       ];
 
       # Setting up the environment variables you need during
